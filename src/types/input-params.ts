@@ -1,0 +1,110 @@
+export interface TrainConstantParams {
+  i_T: number;
+  i_M: number;
+  n_axle: number;
+  n_tm: number;
+  wheelDiameter: number;
+  mass_P: number;
+  gearRatio: number;
+  carLength: number;
+  loadCondition: ['AW0', 'AW1', 'AW2', 'AW3', 'AW4'];
+  trainsetData: ['12', '10', '8', '6', '4', '12-Degraded', '10-Degraded'];
+}
+
+export interface TrainMassParams {
+  mass_M1: number;
+  mass_M2: number;
+  mass_T1: number;
+  mass_T2: number;
+  mass_T3: number;
+  mass_Tc: number;
+  totalEmptyMass: number;
+  totalLoadMass: number;
+  totalInertialMass: number;
+  i_M: number;
+  i_T: number;
+}
+
+export interface TrainPassangerParams {
+  n_PTc: number;
+  n_PM1: number;
+  n_PM2: number;
+  n_PT1: number; // Fixed: was n_Pt1 (lowercase t)
+  n_PT2: number; // Fixed: was n_Pt2 (lowercase t)
+  n_PT3: number; // Fixed: was n_Pt3 (lowercase t)
+}
+
+export interface TrainNumberParams {
+  n_M1: number;
+  n_M2: number;
+  n_T1: number;
+  n_T2: number;
+  n_T3: number;
+  n_Tc: number;
+  n_M1_disabled: number;
+  n_M2_disabled: number;
+}
+
+export interface TrackParams {
+  n_station: number;
+  x_station: number;
+  x_station_array?: number[];
+  tot_x_station_array?: number[];
+  radius: number;
+  radius_array?: number[];
+  x_radiusStart_array?: number[];
+  x_radiusEnd_array?: number[];
+  slope: number;
+  slope_array?: number[];
+  x_slopeStart_array?: number[];
+  x_slopeEnd_array?: number[];
+  v_limit: number;
+  v_limit_array?: number[];
+  x_v_limitStart_array?: number[];
+  x_v_limitEnd_array?: number[];
+  dwellTime: number;
+  dwellTime_array?: number[];
+}
+
+export interface RunningParams {
+  startRes: number;
+  v_diffCoast: number;
+  acc_linear_si: number;
+  acc_linear: number;
+  pow_gear: string;
+  acc_start_si: number;
+  acc_start: number;
+  v_p1: number;
+  v_p2: number;
+  v_b1: number;
+  v_b2: number;
+  decc_linear_si: number;
+  decc_linear: number;
+  brake_gear: string;
+  decc_start_si: number;
+  decc_start: number;
+  decc_emergency_si: number;
+  decc_emergency: number;
+  dt: number;
+}
+
+export interface ElectricalParams {
+  stat_vol_line: number;
+  stat_vol_motor: number;
+  stat_pf: number;
+  stat_eff_gear: number;
+  stat_eff_motor: number;
+  stat_eff_vvvf: number;
+  p_aps: number;
+  // Speed-indexed curve arrays (col 0 = speed thresholds, col 1 = values)
+  vol_line_array?: number[];
+  v_vol_line_array?: number[];
+  vol_motor_array?: number[];
+  v_vol_motor_array?: number[];
+  eff_gear_array?: number[];
+  v_eff_gear_array?: number[];
+  eff_motor_array?: number[];
+  v_eff_motor_array?: number[];
+  eff_vvvf_array?: number[];
+  v_eff_vvvf_array?: number[];
+}
