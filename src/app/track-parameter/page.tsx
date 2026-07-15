@@ -27,6 +27,79 @@ import { useTranslations } from 'next-intl';
 import { csvExportPresetHandler } from '@/lib/csv-handler';
 import { FormActionButtons } from '@/components/buttons/form-action-buttons';
 
+const DEFAULT_TRACK_CSV_DATA: Record<string, number[][]> = {
+  x_station: [
+    [0.0, 3154.0, 3154.0],
+    [3154.0, 6485.0, 3331.0],
+    [6485.0, 9540.0, 3055.0],
+    [9540.0, 11933.0, 2393.0],
+    [11933.0, 13316.0, 1383.0],
+    [13316.0, 14662.0, 1346.0],
+    [14662.0, 17300.0, 2638.0],
+    [17270.0, 19652.0, 2352.0],
+    [19652.0, 24860.0, 5208.0],
+    [24860.0, 27658.0, 2798.0],
+    [27658.0, 32505.0, 4847.0],
+    [32505.0, 37678.0, 5173.0],
+    [37678.0, 41799.0, 4121.0]
+  ],
+  v_limit: [
+    [0.0, 3154.0, 100.0],
+    [3154.0, 6485.0, 100.0],
+    [6485.0, 9540.0, 100.0],
+    [9540.0, 11933.0, 100.0],
+    [11933.0, 13316.0, 15.0],
+    [13316.0, 14662.0, 100.0],
+    [14662.0, 17300.0, 100.0],
+    [17270.0, 19652.0, 100.0],
+    [19652.0, 24860.0, 100.0],
+    [24860.0, 27658.0, 100.0],
+    [27658.0, 32505.0, 100.0],
+    [32505.0, 37678.0, 100.0],
+    [37678.0, 41799.0, 100.0]
+  ],
+  slope: [
+    [0.0, 3154.0, 10.0],
+    [3154.0, 6485.0, 10.0],
+    [6485.0, 9540.0, 5.3],
+    [9540.0, 11933.0, 5.3],
+    [11933.0, 13316.0, 8.4],
+    [13316.0, 14662.0, 8.4],
+    [14662.0, 17300.0, 10.0],
+    [17270.0, 19652.0, 10.0],
+    [19652.0, 24860.0, 10.0],
+    [24860.0, 27658.0, 10.0],
+    [27658.0, 32505.0, 10.0],
+    [32505.0, 37678.0, 12.0],
+    [37678.0, 41799.0, 12.0]
+  ],
+  radius: [
+    [0.0, 6485.0, 550.0],
+    [6485.0, 11933.0, 540.0],
+    [11933.0, 14662.0, 890.0],
+    [14662.0, 17300.0, 1100.0],
+    [17300.0, 19652.0, 3100.0],
+    [19652.0, 24860.0, 0.0],
+    [24860.0, 37678.0, 2500.0],
+    [37678.0, 41799.0, 500.0]
+  ],
+  dwellTime: [
+    [3154.0, 60.0],
+    [3331.0, 60.0],
+    [3055.0, 60.0],
+    [2393.0, 60.0],
+    [1383.0, 60.0],
+    [1346.0, 60.0],
+    [2638.0, 60.0],
+    [2352.0, 60.0],
+    [5208.0, 60.0],
+    [2798.0, 60.0],
+    [4847.0, 60.0],
+    [5173.0, 60.0],
+    [4121.0, 60.0]
+  ]
+};
+
 export default function TrackParameterPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [csvData, setCsvData] = useState<Record<string, number[][]>>({});
@@ -46,11 +119,11 @@ export default function TrackParameterPage() {
     slope_option2: 5,
     slope_option3: 10,
     slope_option4: 25,
-    x_station_file: '',
-    radius_file: '',
-    slope_file: '',
-    v_limit_file: '',
-    dwellTime_file: '',
+    x_station_file: 'demo_stations.csv',
+    radius_file: 'demo_radius.csv',
+    slope_file: 'demo_slope.csv',
+    v_limit_file: 'demo_speed.csv',
+    dwellTime_file: 'demo_dwell.csv',
   };
 
   const constantForm = useForm<z.infer<typeof TrackFormSchema>>({
@@ -84,14 +157,17 @@ export default function TrackParameterPage() {
     };
     loadDefaults();
 
-    // Restore uploaded CSV array data
+    // Restore uploaded CSV array data or set default demo data
     const savedCsvData = localStorage.getItem('track-csv-data');
     if (savedCsvData) {
       try {
         setCsvData(JSON.parse(savedCsvData));
       } catch (e) {
         console.error('Failed to restore track CSV data:', e);
+        setCsvData(DEFAULT_TRACK_CSV_DATA);
       }
+    } else {
+      setCsvData(DEFAULT_TRACK_CSV_DATA);
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
