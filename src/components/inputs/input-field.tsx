@@ -63,7 +63,7 @@ export function InputField({
                     }
                   }
                 }}
-                onBlur={(e) => {
+                onBlur={() => {
                   setRawValue(null);
                   field.onBlur();
                 }}

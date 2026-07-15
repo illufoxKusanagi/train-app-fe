@@ -3,7 +3,6 @@
 import { InputField } from "./input-field";
 import { InputDropdown } from "./input-dropdown";
 import { InputUpload } from "./input-upload";
-import { Control } from "react-hook-form";
 import { InputWidgetProps } from "../../types/input-types";
 
 export function InputWidget({

@@ -85,7 +85,7 @@ export default function ChartTab({
   children,
 }: ChartTabProps) {
   const t = useTranslations("Outputs");
-  const data = results?.results ?? [];
+  const data = useMemo(() => results?.results ?? [], [results?.results]);
   const simulationType = results.debugInfo?.simulationType || "dynamic";
   const chartRef = useRef<HTMLDivElement>(null);
 

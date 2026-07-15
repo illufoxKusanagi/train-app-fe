@@ -119,6 +119,16 @@ const carPresets: Record<
   },
 };
 
+// AW Presets (Passenger Counts based on Backend Logic)
+// Order: Tc, M1, M2, T1, T2, T3
+const AW_PRESETS: Record<string, { tc: number; other: number }> = {
+  AW0: { tc: 0, other: 0 },
+  AW1: { tc: 10, other: 20 },
+  AW2: { tc: 20, other: 40 },
+  AW3: { tc: 50, other: 100 },
+  AW4: { tc: 100, other: 200 },
+};
+
 export default function TrainParameter() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [csvData, setCsvData] = useState<Record<string, number[][]>>({});
@@ -495,15 +505,7 @@ export default function TrainParameter() {
     return () => subscription.unsubscribe();
   }, [trainsetForm, handleCarNumberChange]);
 
-  // AW Presets (Passenger Counts based on Backend Logic)
-  // Order: Tc, M1, M2, T1, T2, T3
-  const AW_PRESETS: Record<string, { tc: number; other: number }> = {
-    AW0: { tc: 0, other: 0 },
-    AW1: { tc: 10, other: 20 },
-    AW2: { tc: 20, other: 40 },
-    AW3: { tc: 50, other: 100 },
-    AW4: { tc: 100, other: 200 },
-  };
+
 
   // Watch loadCondition changes and update PASSENGER parameters
   useEffect(() => {
@@ -545,7 +547,7 @@ export default function TrainParameter() {
     });
 
     return () => subscription.unsubscribe();
-  }, [constantForm, trainsetForm]);
+  }, [constantForm, trainsetForm, trans]);
 
   useEffect(() => {
     // Watch both trainset AND constant form changes

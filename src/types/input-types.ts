@@ -14,7 +14,7 @@ export interface InputType {
 export interface InputWidgetProps {
   inputType: InputType;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control: Control<any>;
+  control: any;
   onFileLoad?: (name: string, data: number[][]) => void;
 }
 
@@ -25,7 +25,7 @@ export interface InputFieldProps {
   placeholder?: string;
   isReadOnly?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control: Control<any>;
+  control: any;
 }
 
 export interface InputDropdownProps {
@@ -34,7 +34,7 @@ export interface InputDropdownProps {
   options: string[];
   value?: string | number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control: Control<any>;
+  control: any;
 }
 
 export interface InputUploadProps {
@@ -43,7 +43,7 @@ export interface InputUploadProps {
   name: string;
   requiredColumns?: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control: Control<any>;
+  control: any;
   onFileLoad?: (filePath: string, data: number[][]) => void;
 }
 
