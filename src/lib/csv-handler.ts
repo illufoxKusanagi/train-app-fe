@@ -137,7 +137,11 @@ export function csvUploadHandler(
   }
 
   return dataLines.map((line, idx) => {
-    const values = line.split(',').map((v) => v.trim());
+    let values = line.split(',').map((v) => v.trim());
+    if (values.length === 1 && line.match(/\s+/)) {
+      // Fallback for space-separated files like dwell time-new.csv
+      values = line.trim().split(/\s+/);
+    }
 
     if (requiredColumns > 0 && values.length < requiredColumns) {
       throw new Error(
