@@ -119,11 +119,11 @@ export default function TrackParameterPage() {
     slope_option2: 5,
     slope_option3: 10,
     slope_option4: 25,
-    x_station_file: 'demo_stations.csv',
-    radius_file: 'demo_radius.csv',
-    slope_file: 'demo_slope.csv',
-    v_limit_file: 'demo_speed.csv',
-    dwellTime_file: 'demo_dwell.csv',
+    x_station_file: 'station distance-new.csv',
+    radius_file: 'radius-new.csv',
+    slope_file: 'slope-new.csv',
+    v_limit_file: 'max speed-new.csv',
+    dwellTime_file: 'dwell time-new.csv',
   };
 
   const constantForm = useForm<z.infer<typeof TrackFormSchema>>({
